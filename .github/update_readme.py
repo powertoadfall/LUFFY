@@ -1,6 +1,5 @@
 import hashlib
 import re
-import sys
 
 path = 'README.md'
 text = open(path, encoding='utf-8').read()
@@ -48,6 +47,7 @@ new_entries.sort(key=lambda item: (item[0], item[1]))
 new_block = ''.join(f'- [ ] **{file_path}:{line_number}** - {description}\n'
                     for file_path, line_number, description in new_entries)
 new_text = text[:start] + new_block + text[end:]
+new_text = new_text.rstrip('\n') + '\n\n'
 with open(path, 'w', encoding='utf-8') as handle:
     handle.write(new_text)
 
